@@ -41,6 +41,14 @@ func (self *ResourceList) Memory() *resource.Quantity {
 	return &resource.Quantity{Format: resource.BinarySI}
 }
 
+// Returns the Storage request of VolumeClaimTemplates, or Storage Capacity of PersistentVolume.
+func (self *ResourceList) Storage() *resource.Quantity {
+	if val, ok := (*self)[ResourceStorage]; ok {
+		return &val
+	}
+	return &resource.Quantity{Format: resource.BinarySI}
+}
+
 func (self *ResourceList) Pods() *resource.Quantity {
 	if val, ok := (*self)[ResourcePods]; ok {
 		return &val
